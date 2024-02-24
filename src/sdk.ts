@@ -10,6 +10,7 @@ export type Config = {
   otelcolOrigin?: string;
   tracerName: string;
   meterName: string;
+  metricsExportIntervalMillis?: number;
   loggerName: string;
 };
 
@@ -31,6 +32,7 @@ export function start({ otelcolOrigin = "http://localhost:4318", ...config }: Co
     resource,
     otelcolOrigin,
     meterName: config.meterName,
+    exportIntervalMillis: config.metricsExportIntervalMillis,
   });
   const logger = getLogger({
     resource,
