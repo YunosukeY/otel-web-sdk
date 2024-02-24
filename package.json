@@ -25,5 +25,11 @@
     "eslint-plugin-promise": "^6.0.0",
     "prettier": "^3.2.5",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "^1.7.0",
+    "@opentelemetry/opentelemetry-browser-detector": "^0.48.0",
+    "@opentelemetry/resources": "^1.21.0",
+    "@opentelemetry/semantic-conventions": "^1.21.0"
   }
 }
