@@ -1,0 +1,31 @@
+name: release
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - '*'
+jobs:
+  release:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write # semantic-releaseがrepositoryへのpush権限を要求する
+      issues: read    # semantic-releaseがissueを検索できるように
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          cat <<EOF > .npmrc
+          //npm.pkg.github.com/:_authToken=${NPM_TOKEN}
+          @YunosukeY:registry=https://npm.pkg.github.com
+          EOF
+      - run: yarn install --pure-lockfile
+      - run: yarn build
+      - env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: yarn semantic-release
