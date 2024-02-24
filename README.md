@@ -87,11 +87,11 @@ Your service name.
 
 #### otelcolOrigin (optional)
 
-The origin of OTelCol.
+The origin of OpenTelemetry Collector.
 The default value is `"http://localhost:4318"`.
 
 ## Examples
 
 ### Next.js
 
-See `/examples/nextjs`.
+See under `/examples/nextjs`.
