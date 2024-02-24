@@ -77,10 +77,10 @@
     wrap-ansi "^8.1.0"
     wrap-ansi-cjs "npm:wrap-ansi@^7.0.0"
 
-"@kimitsu/otel-web-sdk@^1.0.0":
+"@kimitsu/otel-sdk-web@^1.0.0":
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@kimitsu/otel-web-sdk/-/otel-web-sdk-1.0.0.tgz#f9faf90c49b9d0f52c5abeb3a2de438e550a1bf8"
-  integrity sha512-ELS8rEx3xuKkLxYXQVK8DVSPX1qmK9TPb3UbBj8dmKE/Qx3p6qr3i4WU5YNVaM+N99k/e9YkbN+fkl6g79Qqbw==
+  resolved "https://registry.yarnpkg.com/@kimitsu/otel-sdk-web/-/otel-sdk-web-1.0.0.tgz#ae08ae9aad168ac700f7c83f2d0949dc40f82df0"
+  integrity sha512-CKSQQkt4bfDAn26Y3OkvHkjt1qGsPaJAla+PbJSyHxMUVaDv1K16fg0Og21Xw2l9lThFMVDWlYSnaEwhYFIPfw==
   dependencies:
     "@opentelemetry/api" "^1.7.0"
     "@opentelemetry/api-logs" "^0.48.0"
