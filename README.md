@@ -91,6 +91,11 @@ The default value is `"http://localhost:4318"`.
 The interval in milliseconds for exporting metrics.
 The default value is `60_000`
 
+#### logLevel (optional)
+
+The log level.
+The default value is `SeverityNumber.INFO`.
+
 ## Examples
 
 ### Next.js

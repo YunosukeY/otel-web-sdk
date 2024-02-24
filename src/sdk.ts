@@ -3,6 +3,7 @@ import { getResource } from "./resource";
 import { type Logger, getLogger } from "./logger";
 import { getTracer } from "./tracer";
 import { getMeter } from "./meter";
+import { type SeverityNumber } from "@opentelemetry/api-logs";
 
 export type Config = {
   serviceName?: string;
@@ -11,6 +12,7 @@ export type Config = {
   meterName: string;
   metricsExportIntervalMillis?: number;
   loggerName: string;
+  logLevel?: SeverityNumber;
 };
 
 export type Result = {
@@ -37,6 +39,7 @@ export function start({ otelcolOrigin = "http://localhost:4318", ...config }: Co
     resource,
     otelcolOrigin,
     loggerName: config.loggerName,
+    logLevel: config.logLevel,
   });
 
   return { tracer, meter, logger };
