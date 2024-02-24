@@ -19,7 +19,7 @@ jobs:
         run: |
           cat <<EOF > .npmrc
           //npm.pkg.github.com/:_authToken=${NPM_TOKEN}
-          @YunosukeY:registry=https://npm.pkg.github.com
+          @kimitsu:registry=https://npm.pkg.github.com
           EOF
       - run: yarn install --pure-lockfile
       - run: yarn build
