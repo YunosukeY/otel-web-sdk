@@ -6,6 +6,9 @@
   "repository": "https://github.com/YunosukeY/otel-web-sdk",
   "author": "YunosukeY",
   "license": "MIT",
+  "scripts": {
+    "tsc": "tsc --noEmit"
+  },
   "devDependencies": {
     "typescript": "^5.3.3"
   }
