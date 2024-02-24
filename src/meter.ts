@@ -5,7 +5,7 @@ import { type IResource } from "@opentelemetry/resources";
 
 type MeterConfig = {
   resource: IResource;
-  url: string;
+  otelcolOrigin: string;
   meterName: string;
 };
 
@@ -14,7 +14,7 @@ export const getMeter = (config: MeterConfig): Meter => {
     resource: config.resource,
     readers: [
       new PeriodicExportingMetricReader({
-        exporter: new OTLPMetricExporter({ url: `${config.url}/v1/metrics` }),
+        exporter: new OTLPMetricExporter({ url: `${config.otelcolOrigin}/v1/metrics` }),
         exportIntervalMillis: 1000,
       }),
     ],

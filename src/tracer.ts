@@ -9,13 +9,15 @@ import { type IResource } from "@opentelemetry/resources";
 
 type TracerConfig = {
   resource: IResource;
-  url: string;
+  otelcolOrigin: string;
   tracerName: string;
 };
 
 export const getTracer = (config: TracerConfig): Tracer => {
   const provider = new WebTracerProvider({ resource: config.resource });
-  provider.addSpanProcessor(new BatchSpanProcessor(new OTLPTraceExporter({ url: `${config.url}/v1/traces` })));
+  provider.addSpanProcessor(
+    new BatchSpanProcessor(new OTLPTraceExporter({ url: `${config.otelcolOrigin}/v1/traces` })),
+  );
   provider.register({
     contextManager: new ZoneContextManager(),
     propagator: new W3CTraceContextPropagator(),
