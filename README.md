@@ -90,6 +90,11 @@ Your service name.
 The origin of OpenTelemetry Collector.
 The default value is `"http://localhost:4318"`.
 
+#### metricsExportIntervalMillis (optional)
+
+The interval in milliseconds for exporting metrics.
+The default value is `60_000`
+
 ## Examples
 
 ### Next.js
