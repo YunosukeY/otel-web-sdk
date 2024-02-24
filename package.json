@@ -7,9 +7,14 @@
   "author": "YunosukeY",
   "license": "MIT",
   "scripts": {
-    "tsc": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "lint": "yarn lint:prettier",
+    "lint:prettier": "prettier --check src",
+    "fix": "yarn fix:prettier",
+    "fix:prettier": "prettier --write src"
   },
   "devDependencies": {
+    "prettier": "^3.2.5",
     "typescript": "^5.3.3"
   }
 }
