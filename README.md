@@ -60,11 +60,7 @@ counter.add(1);
 #### Emit `LogRecord`s
 
 ```ts
-logger.emit({
-  severityNumber: SeverityNumber.INFO,
-  severityText: "INFO",
-  body: "client log",
-});
+logger.info("client log");
 ```
 
 ## Configuration
