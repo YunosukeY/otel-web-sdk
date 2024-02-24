@@ -1,7 +1,6 @@
-import { type Logger } from "@opentelemetry/api-logs";
 import { type Tracer, type Meter } from "@opentelemetry/api";
 import { getResource } from "./resource";
-import { getLogger } from "./logger";
+import { type Logger, getLogger } from "./logger";
 import { getTracer } from "./tracer";
 import { getMeter } from "./meter";
 
