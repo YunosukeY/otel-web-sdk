@@ -6,6 +6,9 @@
   "repository": "https://github.com/YunosukeY/otel-web-sdk",
   "author": "YunosukeY",
   "license": "MIT",
+  "engines": {
+    "node": "^18.0.0"
+  },
   "scripts": {
     "tsc": "tsc --noEmit",
     "lint": "yarn lint:eslint && yarn lint:prettier",
