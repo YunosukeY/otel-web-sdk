@@ -2,7 +2,7 @@ import { Resource, detectResourcesSync, type IResource } from "@opentelemetry/re
 import { SemanticResourceAttributes } from "@opentelemetry/semantic-conventions";
 import { browserDetector } from "@opentelemetry/opentelemetry-browser-detector";
 
-export const getResource = (serviceName: string): IResource => {
+export const getResource = (serviceName?: string): IResource => {
   const baseResource = new Resource({
     [SemanticResourceAttributes.SERVICE_NAME]: serviceName,
   });

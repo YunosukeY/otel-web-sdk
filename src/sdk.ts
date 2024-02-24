@@ -6,8 +6,8 @@ import { getTracer } from "./tracer";
 import { getMeter } from "./meter";
 
 export type Config = {
-  serviceName: string;
-  url: string;
+  serviceName?: string;
+  url?: string;
   tracerName: string;
   meterName: string;
   loggerName: string;
@@ -19,24 +19,24 @@ export type Result = {
   logger: Logger;
 };
 
-export const start = (config: Config): Result => {
+export function start({ url = "http://localhost:4318", ...config }: Config): Result {
   const resource = getResource(config.serviceName);
 
   const tracer = getTracer({
     resource,
-    url: config.url,
+    url,
     tracerName: config.tracerName,
   });
   const meter = getMeter({
     resource,
-    url: config.url,
+    url,
     meterName: config.meterName,
   });
   const logger = getLogger({
     resource,
-    url: config.url,
+    url,
     loggerName: config.loggerName,
   });
 
   return { tracer, meter, logger };
-};
+}
