@@ -7,7 +7,7 @@ import { getMeter } from "./meter";
 
 export type Config = {
   serviceName?: string;
-  collectorOrigin?: string;
+  otelcolOrigin?: string;
   tracerName: string;
   meterName: string;
   loggerName: string;
@@ -19,22 +19,22 @@ export type Result = {
   logger: Logger;
 };
 
-export function start({ collectorOrigin = "http://localhost:4318", ...config }: Config): Result {
+export function start({ otelcolOrigin = "http://localhost:4318", ...config }: Config): Result {
   const resource = getResource(config.serviceName);
 
   const tracer = getTracer({
     resource,
-    collectorOrigin,
+    otelcolOrigin,
     tracerName: config.tracerName,
   });
   const meter = getMeter({
     resource,
-    collectorOrigin,
+    otelcolOrigin,
     meterName: config.meterName,
   });
   const logger = getLogger({
     resource,
-    collectorOrigin,
+    otelcolOrigin,
     loggerName: config.loggerName,
   });
 
