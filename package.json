@@ -1,0 +1,9 @@
+{
+  "name": "otel-web-sdk",
+  "version": "1.0.0",
+  "description": "OpenTelemetry SDK for Brower JS",
+  "main": "index.js",
+  "repository": "https://github.com/YunosukeY/otel-web-sdk",
+  "author": "YunosukeY",
+  "license": "MIT"
+}
