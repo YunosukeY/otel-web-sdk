@@ -7,7 +7,7 @@ import { getMeter } from "./meter";
 
 export type Config = {
   serviceName?: string;
-  url?: string;
+  collectorOrigin?: string;
   tracerName: string;
   meterName: string;
   loggerName: string;
@@ -19,22 +19,22 @@ export type Result = {
   logger: Logger;
 };
 
-export function start({ url = "http://localhost:4318", ...config }: Config): Result {
+export function start({ collectorOrigin = "http://localhost:4318", ...config }: Config): Result {
   const resource = getResource(config.serviceName);
 
   const tracer = getTracer({
     resource,
-    url,
+    collectorOrigin,
     tracerName: config.tracerName,
   });
   const meter = getMeter({
     resource,
-    url,
+    collectorOrigin,
     meterName: config.meterName,
   });
   const logger = getLogger({
     resource,
-    url,
+    collectorOrigin,
     loggerName: config.loggerName,
   });
 
