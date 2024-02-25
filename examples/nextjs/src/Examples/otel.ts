@@ -7,5 +7,6 @@ export const { tracer, meter, logger } = start({
   otelcolOrigin: "http://localhost:3000",
   tracerName: "app",
   meterName: "app",
+  metricsExportIntervalMillis: 1000,
   loggerName: "app",
 });
