@@ -10,15 +10,10 @@ import {
 } from "@opentelemetry/sdk-trace-web";
 import { W3CTraceContextPropagator } from "@opentelemetry/core";
 import { trace, type Tracer } from "@opentelemetry/api";
-import { type IResource } from "@opentelemetry/resources";
 import { XMLHttpRequestInstrumentation } from "@opentelemetry/instrumentation-xml-http-request";
-import { type TracesConfigAttributes } from "./sdk";
+import { type _CommonConfigAttributes, type TracesConfigAttributes } from "./sdk";
 
-type TracerConfig = {
-  resource: IResource;
-  otelcolOrigin: string;
-  debug: boolean;
-} & TracesConfigAttributes;
+type TracerConfig = _CommonConfigAttributes & TracesConfigAttributes;
 
 export const getTracer = ({ otelcolTracesPath = "/v1/traces", ...config }: TracerConfig): Tracer => {
   const provider = new WebTracerProvider({ resource: config.resource });

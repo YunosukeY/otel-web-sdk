@@ -1,14 +1,9 @@
 import { metrics, type Meter } from "@opentelemetry/api";
 import { OTLPMetricExporter } from "@opentelemetry/exporter-metrics-otlp-http";
 import { ConsoleMetricExporter, MeterProvider, PeriodicExportingMetricReader } from "@opentelemetry/sdk-metrics";
-import { type IResource } from "@opentelemetry/resources";
-import { type MetricsConfigAttributes } from "./sdk";
+import { type _CommonConfigAttributes, type MetricsConfigAttributes } from "./sdk";
 
-type MeterConfig = {
-  resource: IResource;
-  otelcolOrigin: string;
-  debug: boolean;
-} & MetricsConfigAttributes;
+type MeterConfig = _CommonConfigAttributes & MetricsConfigAttributes;
 
 export const getMeter = ({ otelcolMetricsPath = "/v1/metrics", ...config }: MeterConfig): Meter => {
   const readers = [

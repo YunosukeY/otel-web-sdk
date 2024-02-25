@@ -6,8 +6,7 @@ import {
   SimpleLogRecordProcessor,
 } from "@opentelemetry/sdk-logs";
 import { OTLPLogExporter } from "@opentelemetry/exporter-logs-otlp-http";
-import { type IResource } from "@opentelemetry/resources";
-import { type LogsConfigAttributes } from "./sdk";
+import { type _CommonConfigAttributes, type LogsConfigAttributes } from "./sdk";
 
 export class Logger {
   private readonly logger: OtelLogger;
@@ -85,11 +84,7 @@ export class Logger {
   }
 }
 
-type LoggerConfig = {
-  resource: IResource;
-  otelcolOrigin: string;
-  debug: boolean;
-} & LogsConfigAttributes;
+type LoggerConfig = _CommonConfigAttributes & LogsConfigAttributes;
 
 export const getLogger = ({
   otelcolLogsPath = "/v1/logs",

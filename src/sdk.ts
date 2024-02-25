@@ -4,6 +4,7 @@ import { type Logger, getLogger } from "./logger";
 import { getTracer } from "./tracer";
 import { getMeter } from "./meter";
 import { type SeverityNumber } from "@opentelemetry/api-logs";
+import { type IResource } from "@opentelemetry/resources";
 
 type CommonConfigAttributes = {
   /**
@@ -20,6 +21,10 @@ type CommonConfigAttributes = {
    * @default false
    */
   debug?: boolean;
+};
+
+export type _CommonConfigAttributes = Required<Pick<CommonConfigAttributes, "otelcolOrigin" | "debug">> & {
+  resource: IResource;
 };
 
 export type TracesConfigAttributes = {
