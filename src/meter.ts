@@ -7,6 +7,7 @@ type MeterConfig = {
   resource: IResource;
   otelcolOrigin: string;
   meterName: string;
+  otelcolPath: string;
   exportIntervalMillis?: number;
 };
 
@@ -15,7 +16,7 @@ export const getMeter = (config: MeterConfig): Meter => {
     resource: config.resource,
     readers: [
       new PeriodicExportingMetricReader({
-        exporter: new OTLPMetricExporter({ url: `${config.otelcolOrigin}/v1/metrics` }),
+        exporter: new OTLPMetricExporter({ url: `${config.otelcolOrigin}${config.otelcolPath}` }),
         exportIntervalMillis: config.exportIntervalMillis,
       }),
     ],

@@ -9,9 +9,12 @@ export type Config = {
   serviceName?: string;
   otelcolOrigin?: string;
   tracerName: string;
+  otelcolTracesPath?: string;
   meterName: string;
+  otelcolMetricsPath?: string;
   metricsExportIntervalMillis?: number;
   loggerName: string;
+  otelcolLogsPath?: string;
   logLevel?: SeverityNumber;
 };
 
@@ -21,24 +24,33 @@ export type Result = {
   logger: Logger;
 };
 
-export function start({ otelcolOrigin = "http://localhost:4318", ...config }: Config): Result {
+export function start({
+  otelcolOrigin = "http://localhost:4318",
+  otelcolTracesPath = "/v1/traces",
+  otelcolMetricsPath = "/v1/metrics",
+  otelcolLogsPath = "/v1/logs",
+  ...config
+}: Config): Result {
   const resource = getResource(config.serviceName);
 
   const tracer = getTracer({
     resource,
     otelcolOrigin,
     tracerName: config.tracerName,
+    otelcolPath: otelcolTracesPath,
   });
   const meter = getMeter({
     resource,
     otelcolOrigin,
     meterName: config.meterName,
+    otelcolPath: otelcolMetricsPath,
     exportIntervalMillis: config.metricsExportIntervalMillis,
   });
   const logger = getLogger({
     resource,
     otelcolOrigin,
     loggerName: config.loggerName,
+    otelcolPath: otelcolLogsPath,
     logLevel: config.logLevel,
   });
 

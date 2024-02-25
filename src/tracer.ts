@@ -11,12 +11,13 @@ type TracerConfig = {
   resource: IResource;
   otelcolOrigin: string;
   tracerName: string;
+  otelcolPath: string;
 };
 
 export const getTracer = (config: TracerConfig): Tracer => {
   const provider = new WebTracerProvider({ resource: config.resource });
   provider.addSpanProcessor(
-    new BatchSpanProcessor(new OTLPTraceExporter({ url: `${config.otelcolOrigin}/v1/traces` })),
+    new BatchSpanProcessor(new OTLPTraceExporter({ url: `${config.otelcolOrigin}${config.otelcolPath}` })),
   );
   provider.register({
     contextManager: new ZoneContextManager(),

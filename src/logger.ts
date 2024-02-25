@@ -83,13 +83,14 @@ type LoggerConfig = {
   resource: IResource;
   otelcolOrigin: string;
   loggerName: string;
+  otelcolPath: string;
   logLevel?: SeverityNumber;
 };
 
 export const getLogger = ({ logLevel = SeverityNumber.INFO, ...config }: LoggerConfig): Logger => {
   const loggerProvider = new LoggerProvider({ resource: config.resource });
   loggerProvider.addLogRecordProcessor(
-    new BatchLogRecordProcessor(new OTLPLogExporter({ url: `${config.otelcolOrigin}/v1/logs` })),
+    new BatchLogRecordProcessor(new OTLPLogExporter({ url: `${config.otelcolOrigin}${config.otelcolPath}` })),
   );
   logs.setGlobalLoggerProvider(loggerProvider);
 
