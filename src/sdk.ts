@@ -5,7 +5,7 @@ import { getTracer } from "./tracer";
 import { getMeter } from "./meter";
 import { type SeverityNumber } from "@opentelemetry/api-logs";
 
-export type Config = {
+type CommonConfigAttributes = {
   /**
    * Your service name.
    */
@@ -20,7 +20,9 @@ export type Config = {
    * @default false
    */
   debug?: boolean;
+};
 
+type TracesConfigAttributes = {
   /**
    * The `Tracer` name.
    */
@@ -30,7 +32,9 @@ export type Config = {
    * @default "/v1/traces"
    */
   otelcolTracesPath?: string;
+};
 
+type MetricsConfigAttributes = {
   /**
    * The `Meter` name.
    */
@@ -45,7 +49,9 @@ export type Config = {
    * @default 60_000
    */
   metricsExportIntervalMillis?: number;
+};
 
+type LogsConfigAttributes = {
   /**
    * The `Logger` name.
    */
@@ -61,6 +67,8 @@ export type Config = {
    */
   logLevel?: SeverityNumber;
 };
+
+export type Config = CommonConfigAttributes & TracesConfigAttributes & MetricsConfigAttributes & LogsConfigAttributes;
 
 export type Result = {
   tracer: Tracer;
