@@ -86,6 +86,21 @@ Your service name.
 The origin of OpenTelemetry Collector.
 The default value is `"http://localhost:4318"`.
 
+### otelcolTracesPath (optional)
+
+The path of the traces endpoint of OpenTelemetry Collector.
+The default value is `/v1/traces`.
+
+### otelcolMetricsPath (optional)
+
+The path of the metrics endpoint of OpenTelemetry Collector.
+The default value is `/v1/metrics`.
+
+### otelcolLogsPath (optional)
+
+The path of the logs endpoint of OpenTelemetry Collector.
+The default value is `/v1/logs`.
+
 #### metricsExportIntervalMillis (optional)
 
 The interval in milliseconds for exporting metrics.
