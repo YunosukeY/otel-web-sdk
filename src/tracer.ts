@@ -6,6 +6,7 @@ import { BatchSpanProcessor, WebTracerProvider } from "@opentelemetry/sdk-trace-
 import { W3CTraceContextPropagator } from "@opentelemetry/core";
 import { trace, type Tracer } from "@opentelemetry/api";
 import { type IResource } from "@opentelemetry/resources";
+import { XMLHttpRequestInstrumentation } from "@opentelemetry/instrumentation-xml-http-request";
 
 type TracerConfig = {
   resource: IResource;
@@ -28,6 +29,9 @@ export const getTracer = (config: TracerConfig): Tracer => {
   registerInstrumentations({
     instrumentations: [
       new FetchInstrumentation({
+        clearTimingResources: true,
+      }),
+      new XMLHttpRequestInstrumentation({
         clearTimingResources: true,
       }),
     ],
