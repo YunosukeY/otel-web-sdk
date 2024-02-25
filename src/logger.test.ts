@@ -2,147 +2,87 @@ import { SeverityNumber } from "@opentelemetry/api-logs";
 import { Logger } from "./logger";
 
 describe("Logger", () => {
-  describe("trace", () => {
-    it("should not emit a trace log if log level is UNSPECIFIED", () => {
-      const emit = jest.fn();
-      const logger = new Logger({ emit }, SeverityNumber.UNSPECIFIED);
+  describe("isTraceEnabled", () => {
+    it("should return false if log level is UNSPECIFIED", () => {
+      const logger = new Logger({ emit: () => {} }, SeverityNumber.UNSPECIFIED);
 
-      logger.trace("trace");
-
-      expect(emit).not.toHaveBeenCalled();
+      expect(logger.isTraceEnabled()).toBeFalsy();
     });
 
-    it("should emit a trace log if log level is TRACE", () => {
-      const emit = jest.fn();
-      const logger = new Logger({ emit }, SeverityNumber.TRACE);
+    it("should return true if log level is TRACE", () => {
+      const logger = new Logger({ emit: () => {} }, SeverityNumber.TRACE);
 
-      logger.trace("trace");
-
-      expect(emit).toHaveBeenCalledWith({
-        severityNumber: SeverityNumber.TRACE,
-        severityText: "TRACE",
-        body: "trace",
-      });
+      expect(logger.isTraceEnabled()).toBeTruthy();
     });
   });
 
-  describe("debug", () => {
-    it("should not emit a debug log if log level is TRACE", () => {
-      const emit = jest.fn();
-      const logger = new Logger({ emit }, SeverityNumber.TRACE);
+  describe("isDebugEnabled", () => {
+    it("should return false if log level is TRACE", () => {
+      const logger = new Logger({ emit: () => {} }, SeverityNumber.TRACE);
 
-      logger.debug("debug");
-
-      expect(emit).not.toHaveBeenCalled();
+      expect(logger.isDebugEnabled()).toBeFalsy();
     });
 
-    it("should emit a debug log if log level is DEBUG", () => {
-      const emit = jest.fn();
-      const logger = new Logger({ emit }, SeverityNumber.DEBUG);
+    it("should return true if log level is DEBUG", () => {
+      const logger = new Logger({ emit: () => {} }, SeverityNumber.DEBUG);
 
-      logger.debug("debug");
-
-      expect(emit).toHaveBeenCalledWith({
-        severityNumber: SeverityNumber.DEBUG,
-        severityText: "DEBUG",
-        body: "debug",
-      });
+      expect(logger.isDebugEnabled()).toBeTruthy();
     });
   });
 
-  describe("info", () => {
-    it("should not emit a info log if log leve is DEBUG", () => {
-      const emit = jest.fn();
-      const logger = new Logger({ emit }, SeverityNumber.DEBUG);
+  describe("isInfoEnabled", () => {
+    it("should return false if log level is DEBUG", () => {
+      const logger = new Logger({ emit: () => {} }, SeverityNumber.DEBUG);
 
-      logger.info("info");
-
-      expect(emit).not.toHaveBeenCalled();
+      expect(logger.isInfoEnabled()).toBeFalsy();
     });
 
-    it("should emit a info log if log level is INFO", () => {
-      const emit = jest.fn();
-      const logger = new Logger({ emit }, SeverityNumber.INFO);
+    it("should return true if log level is INFO", () => {
+      const logger = new Logger({ emit: () => {} }, SeverityNumber.INFO);
 
-      logger.info("info");
-
-      expect(emit).toHaveBeenCalledWith({
-        severityNumber: SeverityNumber.INFO,
-        severityText: "INFO",
-        body: "info",
-      });
+      expect(logger.isInfoEnabled()).toBeTruthy();
     });
   });
 
-  describe("warn", () => {
-    it("should not emit a warn log if log level is INFO", () => {
-      const emit = jest.fn();
-      const logger = new Logger({ emit }, SeverityNumber.INFO);
+  describe("isWarnEnabled", () => {
+    it("should return false if log level is INFO", () => {
+      const logger = new Logger({ emit: () => {} }, SeverityNumber.INFO);
 
-      logger.warn("warn");
-
-      expect(emit).not.toHaveBeenCalled();
+      expect(logger.isWarnEnabled()).toBeFalsy();
     });
 
-    it("should emit a warn log if log level is WARN", () => {
-      const emit = jest.fn();
-      const logger = new Logger({ emit }, SeverityNumber.WARN);
+    it("should return true if log level is WARN", () => {
+      const logger = new Logger({ emit: () => {} }, SeverityNumber.WARN);
 
-      logger.warn("warn");
-
-      expect(emit).toHaveBeenCalledWith({
-        severityNumber: SeverityNumber.WARN,
-        severityText: "WARN",
-        body: "warn",
-      });
+      expect(logger.isWarnEnabled()).toBeTruthy();
     });
   });
 
-  describe("error", () => {
-    it("should not emit a error log if log level is WARN", () => {
-      const emit = jest.fn();
-      const logger = new Logger({ emit }, SeverityNumber.WARN);
+  describe("isErrorEnabled", () => {
+    it("should return false if log level is WARN", () => {
+      const logger = new Logger({ emit: () => {} }, SeverityNumber.WARN);
 
-      logger.error("error");
-
-      expect(emit).not.toHaveBeenCalled();
+      expect(logger.isErrorEnabled()).toBeFalsy();
     });
 
-    it("should emit a error log if log level is ERROR", () => {
-      const emit = jest.fn();
-      const logger = new Logger({ emit }, SeverityNumber.ERROR);
+    it("should return true if log level is ERROR", () => {
+      const logger = new Logger({ emit: () => {} }, SeverityNumber.ERROR);
 
-      logger.error("error");
-
-      expect(emit).toHaveBeenCalledWith({
-        severityNumber: SeverityNumber.ERROR,
-        severityText: "ERROR",
-        body: "error",
-      });
+      expect(logger.isErrorEnabled()).toBeTruthy();
     });
   });
 
-  describe("fatal", () => {
-    it("should not emit a fatal log if log level is ERROR", () => {
-      const emit = jest.fn();
-      const logger = new Logger({ emit }, SeverityNumber.ERROR);
+  describe("isFatalEnabled", () => {
+    it("should return false if log level is ERROR", () => {
+      const logger = new Logger({ emit: () => {} }, SeverityNumber.ERROR);
 
-      logger.fatal("fatal");
-
-      expect(emit).not.toHaveBeenCalled();
+      expect(logger.isFatalEnabled()).toBeFalsy();
     });
 
-    it("should emit a fatal log if log level is FATAL", () => {
-      const emit = jest.fn();
-      const logger = new Logger({ emit }, SeverityNumber.FATAL);
+    it("should return true if log level is FATAL", () => {
+      const logger = new Logger({ emit: () => {} }, SeverityNumber.FATAL);
 
-      logger.fatal("fatal");
-
-      expect(emit).toHaveBeenCalledWith({
-        severityNumber: SeverityNumber.FATAL,
-        severityText: "FATAL",
-        body: "fatal",
-      });
+      expect(logger.isFatalEnabled()).toBeTruthy();
     });
   });
 });
