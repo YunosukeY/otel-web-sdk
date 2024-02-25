@@ -2,7 +2,12 @@ import { ZoneContextManager } from "@opentelemetry/context-zone";
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
 import { registerInstrumentations } from "@opentelemetry/instrumentation";
 import { FetchInstrumentation } from "@opentelemetry/instrumentation-fetch";
-import { BatchSpanProcessor, WebTracerProvider } from "@opentelemetry/sdk-trace-web";
+import {
+  BatchSpanProcessor,
+  ConsoleSpanExporter,
+  SimpleSpanProcessor,
+  WebTracerProvider,
+} from "@opentelemetry/sdk-trace-web";
 import { W3CTraceContextPropagator } from "@opentelemetry/core";
 import { trace, type Tracer } from "@opentelemetry/api";
 import { type IResource } from "@opentelemetry/resources";
@@ -13,6 +18,7 @@ type TracerConfig = {
   otelcolOrigin: string;
   tracerName: string;
   otelcolPath: string;
+  debug: boolean;
 };
 
 export const getTracer = (config: TracerConfig): Tracer => {
@@ -20,6 +26,9 @@ export const getTracer = (config: TracerConfig): Tracer => {
   provider.addSpanProcessor(
     new BatchSpanProcessor(new OTLPTraceExporter({ url: `${config.otelcolOrigin}${config.otelcolPath}` })),
   );
+  if (config.debug) {
+    provider.addSpanProcessor(new SimpleSpanProcessor(new ConsoleSpanExporter()));
+  }
   provider.register({
     contextManager: new ZoneContextManager(),
     propagator: new W3CTraceContextPropagator(),
