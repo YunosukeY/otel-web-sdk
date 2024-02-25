@@ -21,7 +21,7 @@ export class Logger {
    * Emit a trace log if trace level is enabled.
    */
   trace(message: string): void {
-    if (this.logLevel > SeverityNumber.TRACE) {
+    if (!this.isTraceEnabled()) {
       return;
     }
     this.logger.emit({
@@ -35,7 +35,7 @@ export class Logger {
    * Emit a debug log if debug level is enabled.
    */
   debug(message: string): void {
-    if (this.logLevel > SeverityNumber.DEBUG) {
+    if (!this.isDebugEnabled()) {
       return;
     }
     this.logger.emit({
@@ -49,7 +49,7 @@ export class Logger {
    * Emit an info log if info level is enabled.
    */
   info(message: string): void {
-    if (this.logLevel > SeverityNumber.INFO) {
+    if (!this.isInfoEnabled()) {
       return;
     }
     this.logger.emit({
@@ -63,7 +63,7 @@ export class Logger {
    * Emit a warn log if warn level is enabled.
    */
   warn(message: string): void {
-    if (this.logLevel > SeverityNumber.WARN) {
+    if (!this.isWarnEnabled()) {
       return;
     }
     this.logger.emit({
@@ -77,7 +77,7 @@ export class Logger {
    * Emit an error log if error level is enabled.
    */
   error(message: string): void {
-    if (this.logLevel > SeverityNumber.ERROR) {
+    if (!this.isErrorEnabled()) {
       return;
     }
     this.logger.emit({
@@ -91,7 +91,7 @@ export class Logger {
    * Emit a fatal log if fatal level is enabled.
    */
   fatal(message: string): void {
-    if (this.logLevel > SeverityNumber.FATAL) {
+    if (!this.isFatalEnabled()) {
       return;
     }
     this.logger.emit({
@@ -99,6 +99,30 @@ export class Logger {
       severityText: "FATAL",
       body: message,
     });
+  }
+
+  isTraceEnabled(): boolean {
+    return this.logLevel >= SeverityNumber.TRACE;
+  }
+
+  isDebugEnabled(): boolean {
+    return this.logLevel >= SeverityNumber.DEBUG;
+  }
+
+  isInfoEnabled(): boolean {
+    return this.logLevel >= SeverityNumber.INFO;
+  }
+
+  isWarnEnabled(): boolean {
+    return this.logLevel >= SeverityNumber.WARN;
+  }
+
+  isErrorEnabled(): boolean {
+    return this.logLevel >= SeverityNumber.ERROR;
+  }
+
+  isFatalEnabled(): boolean {
+    return this.logLevel >= SeverityNumber.FATAL;
   }
 }
 
