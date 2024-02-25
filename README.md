@@ -68,33 +68,33 @@ logger.info("client log");
 Common Attributes
 
 | Option Name     | Required | Description                                       | Type      | Default Value             |
-| --------------- | -------- | ------------------------------------------------- | --------- | ------------------------- |
-| `serviceName`   | ❌       | Your service name.                                | `string`  |                           |
-| `otelcolOrigin` | ❌       | The origin of OpenTelemetry Collector.            | `string`  | `"http://localhost:4318"` |
-| `debug`         | ❌       | The flag to enable debug output to `console.log`. | `boolean` | `false`                   |
+| --------------- | :------: | ------------------------------------------------- | --------- | ------------------------- |
+| `serviceName`   |    ❌    | Your service name.                                | `string`  |                           |
+| `otelcolOrigin` |    ❌    | The origin of OpenTelemetry Collector.            | `string`  | `"http://localhost:4318"` |
+| `debug`         |    ❌    | The flag to enable debug output to `console.log`. | `boolean` | `false`                   |
 
 Traces Attributes
 
 | Option Name         | Required | Description                                                 | Type     | Default Value  |
-| ------------------- | -------- | ----------------------------------------------------------- | -------- | -------------- |
-| `tracerName`        | ✅       | The `Tracer` name.                                          | `string` |                |
-| `otelcolTracesPath` | ❌       | The path of the traces endpoint of OpenTelemetry Collector. | `string` | `"/v1/traces"` |
+| ------------------- | :------: | ----------------------------------------------------------- | -------- | -------------- |
+| `tracerName`        |    ✅    | The `Tracer` name.                                          | `string` |                |
+| `otelcolTracesPath` |    ❌    | The path of the traces endpoint of OpenTelemetry Collector. | `string` | `"/v1/traces"` |
 
 Metrics Attributes
 
 | Option Name                   | Required | Description                                                  | Type     | Default Value   |
-| ----------------------------- | -------- | ------------------------------------------------------------ | -------- | --------------- |
-| `meterName`                   | ✅       | The `Meter` name.                                            | `string` |                 |
-| `otelcolMetricsPath`          | ❌       | The path of the metrics endpoint of OpenTelemetry Collector. | `string` | `"/v1/metrics"` |
-| `metricsExportIntervalMillis` | ❌       | The interval in milliseconds for exporting metrics.          | `number` | `60_000`        |
+| ----------------------------- | :------: | ------------------------------------------------------------ | -------- | --------------- |
+| `meterName`                   |    ✅    | The `Meter` name.                                            | `string` |                 |
+| `otelcolMetricsPath`          |    ❌    | The path of the metrics endpoint of OpenTelemetry Collector. | `string` | `"/v1/metrics"` |
+| `metricsExportIntervalMillis` |    ❌    | The interval in milliseconds for exporting metrics.          | `number` | `60_000`        |
 
 Logs Attributes
 
 | Option Name       | Required | Description                                               | Type             | Default Value         |
-| ----------------- | -------- | --------------------------------------------------------- | ---------------- | --------------------- |
-| `loggerName`      | ✅       | The `Logger` name.                                        | `string`         |                       |
-| `otelcolLogsPath` | ❌       | The path of the logs endpoint of OpenTelemetry Collector. | `string`         | `"/v1/logs"`          |
-| `logLevel`        | ❌       | The log level.                                            | `SeverityNumber` | `SeverityNumber.INFO` |
+| ----------------- | :------: | --------------------------------------------------------- | ---------------- | --------------------- |
+| `loggerName`      |    ✅    | The `Logger` name.                                        | `string`         |                       |
+| `otelcolLogsPath` |    ❌    | The path of the logs endpoint of OpenTelemetry Collector. | `string`         | `"/v1/logs"`          |
+| `logLevel`        |    ❌    | The log level.                                            | `SeverityNumber` | `SeverityNumber.INFO` |
 
 ## Examples
 
