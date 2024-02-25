@@ -17,6 +17,9 @@ export class Logger {
     this.logLevel = logLevel;
   }
 
+  /**
+   * Emit a trace log if trace level is enabled.
+   */
   trace(message: string): void {
     if (this.logLevel > SeverityNumber.TRACE) {
       return;
@@ -28,6 +31,9 @@ export class Logger {
     });
   }
 
+  /**
+   * Emit a debug log if debug level is enabled.
+   */
   debug(message: string): void {
     if (this.logLevel > SeverityNumber.DEBUG) {
       return;
@@ -39,6 +45,9 @@ export class Logger {
     });
   }
 
+  /**
+   * Emit an info log if info level is enabled.
+   */
   info(message: string): void {
     if (this.logLevel > SeverityNumber.INFO) {
       return;
@@ -50,6 +59,9 @@ export class Logger {
     });
   }
 
+  /**
+   * Emit a warn log if warn level is enabled.
+   */
   warn(message: string): void {
     if (this.logLevel > SeverityNumber.WARN) {
       return;
@@ -61,6 +73,9 @@ export class Logger {
     });
   }
 
+  /**
+   * Emit an error log if error level is enabled.
+   */
   error(message: string): void {
     if (this.logLevel > SeverityNumber.ERROR) {
       return;
@@ -72,6 +87,9 @@ export class Logger {
     });
   }
 
+  /**
+   * Emit a fatal log if fatal level is enabled.
+   */
   fatal(message: string): void {
     if (this.logLevel > SeverityNumber.FATAL) {
       return;
