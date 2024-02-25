@@ -22,7 +22,7 @@ type CommonConfigAttributes = {
   debug?: boolean;
 };
 
-type TracesConfigAttributes = {
+export type TracesConfigAttributes = {
   /**
    * The `Tracer` name.
    */
@@ -34,7 +34,7 @@ type TracesConfigAttributes = {
   otelcolTracesPath?: string;
 };
 
-type MetricsConfigAttributes = {
+export type MetricsConfigAttributes = {
   /**
    * The `Meter` name.
    */
@@ -51,7 +51,7 @@ type MetricsConfigAttributes = {
   metricsExportIntervalMillis?: number;
 };
 
-type LogsConfigAttributes = {
+export type LogsConfigAttributes = {
   /**
    * The `Logger` name.
    */
@@ -76,36 +76,29 @@ export type Result = {
   logger: Logger;
 };
 
-export function start({
-  otelcolOrigin = "http://localhost:4318",
-  otelcolTracesPath = "/v1/traces",
-  otelcolMetricsPath = "/v1/metrics",
-  otelcolLogsPath = "/v1/logs",
-  debug = false,
-  ...config
-}: Config): Result {
+export function start({ otelcolOrigin = "http://localhost:4318", debug = false, ...config }: Config): Result {
   const resource = getResource(config.serviceName);
 
   const tracer = getTracer({
     resource,
     otelcolOrigin,
     tracerName: config.tracerName,
-    otelcolPath: otelcolTracesPath,
+    otelcolTracesPath: config.otelcolTracesPath,
     debug,
   });
   const meter = getMeter({
     resource,
     otelcolOrigin,
     meterName: config.meterName,
-    otelcolPath: otelcolMetricsPath,
-    exportIntervalMillis: config.metricsExportIntervalMillis,
+    otelcolMetricsPath: config.otelcolMetricsPath,
+    metricsExportIntervalMillis: config.metricsExportIntervalMillis,
     debug,
   });
   const logger = getLogger({
     resource,
     otelcolOrigin,
     loggerName: config.loggerName,
-    otelcolPath: otelcolLogsPath,
+    otelcolLogsPath: config.otelcolLogsPath,
     logLevel: config.logLevel,
     debug,
   });

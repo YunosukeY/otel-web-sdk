@@ -7,6 +7,7 @@ import {
 } from "@opentelemetry/sdk-logs";
 import { OTLPLogExporter } from "@opentelemetry/exporter-logs-otlp-http";
 import { type IResource } from "@opentelemetry/resources";
+import { type LogsConfigAttributes } from "./sdk";
 
 export class Logger {
   private readonly logger: OtelLogger;
@@ -87,16 +88,17 @@ export class Logger {
 type LoggerConfig = {
   resource: IResource;
   otelcolOrigin: string;
-  loggerName: string;
-  otelcolPath: string;
-  logLevel?: SeverityNumber;
   debug: boolean;
-};
+} & LogsConfigAttributes;
 
-export const getLogger = ({ logLevel = SeverityNumber.INFO, ...config }: LoggerConfig): Logger => {
+export const getLogger = ({
+  otelcolLogsPath = "/v1/logs",
+  logLevel = SeverityNumber.INFO,
+  ...config
+}: LoggerConfig): Logger => {
   const loggerProvider = new LoggerProvider({ resource: config.resource });
   loggerProvider.addLogRecordProcessor(
-    new BatchLogRecordProcessor(new OTLPLogExporter({ url: `${config.otelcolOrigin}${config.otelcolPath}` })),
+    new BatchLogRecordProcessor(new OTLPLogExporter({ url: `${config.otelcolOrigin}${otelcolLogsPath}` })),
   );
   if (config.debug) {
     loggerProvider.addLogRecordProcessor(new SimpleLogRecordProcessor(new ConsoleLogRecordExporter()));
