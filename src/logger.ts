@@ -1,5 +1,10 @@
 import { logs, SeverityNumber, type Logger as OtelLogger } from "@opentelemetry/api-logs";
-import { BatchLogRecordProcessor, LoggerProvider } from "@opentelemetry/sdk-logs";
+import {
+  BatchLogRecordProcessor,
+  ConsoleLogRecordExporter,
+  LoggerProvider,
+  SimpleLogRecordProcessor,
+} from "@opentelemetry/sdk-logs";
 import { OTLPLogExporter } from "@opentelemetry/exporter-logs-otlp-http";
 import { type IResource } from "@opentelemetry/resources";
 
@@ -85,6 +90,7 @@ type LoggerConfig = {
   loggerName: string;
   otelcolPath: string;
   logLevel?: SeverityNumber;
+  debug: boolean;
 };
 
 export const getLogger = ({ logLevel = SeverityNumber.INFO, ...config }: LoggerConfig): Logger => {
@@ -92,6 +98,9 @@ export const getLogger = ({ logLevel = SeverityNumber.INFO, ...config }: LoggerC
   loggerProvider.addLogRecordProcessor(
     new BatchLogRecordProcessor(new OTLPLogExporter({ url: `${config.otelcolOrigin}${config.otelcolPath}` })),
   );
+  if (config.debug) {
+    loggerProvider.addLogRecordProcessor(new SimpleLogRecordProcessor(new ConsoleLogRecordExporter()));
+  }
   logs.setGlobalLoggerProvider(loggerProvider);
 
   return new Logger(logs.getLogger(config.loggerName), logLevel);

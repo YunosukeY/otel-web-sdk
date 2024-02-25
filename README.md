@@ -111,6 +111,11 @@ The default value is `60_000`
 The log level.
 The default value is `SeverityNumber.INFO`.
 
+#### debug (optional)
+
+The flag to enable debug output to `console.log`.
+The default value is `false`.
+
 ## Examples
 
 ### Next.js

@@ -8,6 +8,7 @@ import { type SeverityNumber } from "@opentelemetry/api-logs";
 export type Config = {
   serviceName?: string;
   otelcolOrigin?: string;
+  debug?: boolean;
   tracerName: string;
   otelcolTracesPath?: string;
   meterName: string;
@@ -29,6 +30,7 @@ export function start({
   otelcolTracesPath = "/v1/traces",
   otelcolMetricsPath = "/v1/metrics",
   otelcolLogsPath = "/v1/logs",
+  debug = false,
   ...config
 }: Config): Result {
   const resource = getResource(config.serviceName);
@@ -38,6 +40,7 @@ export function start({
     otelcolOrigin,
     tracerName: config.tracerName,
     otelcolPath: otelcolTracesPath,
+    debug,
   });
   const meter = getMeter({
     resource,
@@ -45,6 +48,7 @@ export function start({
     meterName: config.meterName,
     otelcolPath: otelcolMetricsPath,
     exportIntervalMillis: config.metricsExportIntervalMillis,
+    debug,
   });
   const logger = getLogger({
     resource,
@@ -52,6 +56,7 @@ export function start({
     loggerName: config.loggerName,
     otelcolPath: otelcolLogsPath,
     logLevel: config.logLevel,
+    debug,
   });
 
   return { tracer, meter, logger };
