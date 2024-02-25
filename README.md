@@ -65,56 +65,36 @@ logger.info("client log");
 
 ## Configuration
 
-#### tracerName (required)
+Common Attributes
 
-The `Tracer` name.
+| Option Name     | Required | Description                                       | Type      | Default Value             |
+| --------------- | :------: | ------------------------------------------------- | --------- | ------------------------- |
+| `serviceName`   |    ❌    | Your service name.                                | `string`  |                           |
+| `otelcolOrigin` |    ❌    | The origin of OpenTelemetry Collector.            | `string`  | `"http://localhost:4318"` |
+| `debug`         |    ❌    | The flag to enable debug output to `console.log`. | `boolean` | `false`                   |
 
-#### meterName (required)
+Traces Attributes
 
-The `Meter` name.
+| Option Name         | Required | Description                                                 | Type     | Default Value  |
+| ------------------- | :------: | ----------------------------------------------------------- | -------- | -------------- |
+| `tracerName`        |    ✅    | The `Tracer` name.                                          | `string` |                |
+| `otelcolTracesPath` |    ❌    | The path of the traces endpoint of OpenTelemetry Collector. | `string` | `"/v1/traces"` |
 
-#### loggerName (required)
+Metrics Attributes
 
-The `Logger` name.
+| Option Name                   | Required | Description                                                  | Type     | Default Value   |
+| ----------------------------- | :------: | ------------------------------------------------------------ | -------- | --------------- |
+| `meterName`                   |    ✅    | The `Meter` name.                                            | `string` |                 |
+| `otelcolMetricsPath`          |    ❌    | The path of the metrics endpoint of OpenTelemetry Collector. | `string` | `"/v1/metrics"` |
+| `metricsExportIntervalMillis` |    ❌    | The interval in milliseconds for exporting metrics.          | `number` | `60_000`        |
 
-#### serviceName (optional)
+Logs Attributes
 
-Your service name.
-
-#### otelcolOrigin (optional)
-
-The origin of OpenTelemetry Collector.
-The default value is `"http://localhost:4318"`.
-
-### otelcolTracesPath (optional)
-
-The path of the traces endpoint of OpenTelemetry Collector.
-The default value is `/v1/traces`.
-
-### otelcolMetricsPath (optional)
-
-The path of the metrics endpoint of OpenTelemetry Collector.
-The default value is `/v1/metrics`.
-
-### otelcolLogsPath (optional)
-
-The path of the logs endpoint of OpenTelemetry Collector.
-The default value is `/v1/logs`.
-
-#### metricsExportIntervalMillis (optional)
-
-The interval in milliseconds for exporting metrics.
-The default value is `60_000`
-
-#### logLevel (optional)
-
-The log level.
-The default value is `SeverityNumber.INFO`.
-
-#### debug (optional)
-
-The flag to enable debug output to `console.log`.
-The default value is `false`.
+| Option Name       | Required | Description                                               | Type             | Default Value         |
+| ----------------- | :------: | --------------------------------------------------------- | ---------------- | --------------------- |
+| `loggerName`      |    ✅    | The `Logger` name.                                        | `string`         |                       |
+| `otelcolLogsPath` |    ❌    | The path of the logs endpoint of OpenTelemetry Collector. | `string`         | `"/v1/logs"`          |
+| `logLevel`        |    ❌    | The log level.                                            | `SeverityNumber` | `SeverityNumber.INFO` |
 
 ## Examples
 

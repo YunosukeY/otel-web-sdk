@@ -1,29 +1,22 @@
 import { metrics, type Meter } from "@opentelemetry/api";
 import { OTLPMetricExporter } from "@opentelemetry/exporter-metrics-otlp-http";
 import { ConsoleMetricExporter, MeterProvider, PeriodicExportingMetricReader } from "@opentelemetry/sdk-metrics";
-import { type IResource } from "@opentelemetry/resources";
+import { type _CommonConfigAttributes, type MetricsConfigAttributes } from "./sdk";
 
-type MeterConfig = {
-  resource: IResource;
-  otelcolOrigin: string;
-  meterName: string;
-  otelcolPath: string;
-  exportIntervalMillis?: number;
-  debug: boolean;
-};
+type MeterConfig = _CommonConfigAttributes & MetricsConfigAttributes;
 
-export const getMeter = (config: MeterConfig): Meter => {
+export const getMeter = ({ otelcolMetricsPath = "/v1/metrics", ...config }: MeterConfig): Meter => {
   const readers = [
     new PeriodicExportingMetricReader({
-      exporter: new OTLPMetricExporter({ url: `${config.otelcolOrigin}${config.otelcolPath}` }),
-      exportIntervalMillis: config.exportIntervalMillis,
+      exporter: new OTLPMetricExporter({ url: `${config.otelcolOrigin}${otelcolMetricsPath}` }),
+      exportIntervalMillis: config.metricsExportIntervalMillis,
     }),
   ];
   if (config.debug) {
     readers.push(
       new PeriodicExportingMetricReader({
         exporter: new ConsoleMetricExporter(),
-        exportIntervalMillis: config.exportIntervalMillis,
+        exportIntervalMillis: config.metricsExportIntervalMillis,
       }),
     );
   }

@@ -6,7 +6,7 @@ import {
   SimpleLogRecordProcessor,
 } from "@opentelemetry/sdk-logs";
 import { OTLPLogExporter } from "@opentelemetry/exporter-logs-otlp-http";
-import { type IResource } from "@opentelemetry/resources";
+import { type _CommonConfigAttributes, type LogsConfigAttributes } from "./sdk";
 
 export class Logger {
   private readonly logger: OtelLogger;
@@ -17,6 +17,9 @@ export class Logger {
     this.logLevel = logLevel;
   }
 
+  /**
+   * Emit a trace log if trace level is enabled.
+   */
   trace(message: string): void {
     if (this.logLevel > SeverityNumber.TRACE) {
       return;
@@ -28,6 +31,9 @@ export class Logger {
     });
   }
 
+  /**
+   * Emit a debug log if debug level is enabled.
+   */
   debug(message: string): void {
     if (this.logLevel > SeverityNumber.DEBUG) {
       return;
@@ -39,6 +45,9 @@ export class Logger {
     });
   }
 
+  /**
+   * Emit an info log if info level is enabled.
+   */
   info(message: string): void {
     if (this.logLevel > SeverityNumber.INFO) {
       return;
@@ -50,6 +59,9 @@ export class Logger {
     });
   }
 
+  /**
+   * Emit a warn log if warn level is enabled.
+   */
   warn(message: string): void {
     if (this.logLevel > SeverityNumber.WARN) {
       return;
@@ -61,6 +73,9 @@ export class Logger {
     });
   }
 
+  /**
+   * Emit an error log if error level is enabled.
+   */
   error(message: string): void {
     if (this.logLevel > SeverityNumber.ERROR) {
       return;
@@ -72,6 +87,9 @@ export class Logger {
     });
   }
 
+  /**
+   * Emit a fatal log if fatal level is enabled.
+   */
   fatal(message: string): void {
     if (this.logLevel > SeverityNumber.FATAL) {
       return;
@@ -84,19 +102,16 @@ export class Logger {
   }
 }
 
-type LoggerConfig = {
-  resource: IResource;
-  otelcolOrigin: string;
-  loggerName: string;
-  otelcolPath: string;
-  logLevel?: SeverityNumber;
-  debug: boolean;
-};
+type LoggerConfig = _CommonConfigAttributes & LogsConfigAttributes;
 
-export const getLogger = ({ logLevel = SeverityNumber.INFO, ...config }: LoggerConfig): Logger => {
+export const getLogger = ({
+  otelcolLogsPath = "/v1/logs",
+  logLevel = SeverityNumber.INFO,
+  ...config
+}: LoggerConfig): Logger => {
   const loggerProvider = new LoggerProvider({ resource: config.resource });
   loggerProvider.addLogRecordProcessor(
-    new BatchLogRecordProcessor(new OTLPLogExporter({ url: `${config.otelcolOrigin}${config.otelcolPath}` })),
+    new BatchLogRecordProcessor(new OTLPLogExporter({ url: `${config.otelcolOrigin}${otelcolLogsPath}` })),
   );
   if (config.debug) {
     loggerProvider.addLogRecordProcessor(new SimpleLogRecordProcessor(new ConsoleLogRecordExporter()));

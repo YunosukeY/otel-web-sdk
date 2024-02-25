@@ -10,21 +10,15 @@ import {
 } from "@opentelemetry/sdk-trace-web";
 import { W3CTraceContextPropagator } from "@opentelemetry/core";
 import { trace, type Tracer } from "@opentelemetry/api";
-import { type IResource } from "@opentelemetry/resources";
 import { XMLHttpRequestInstrumentation } from "@opentelemetry/instrumentation-xml-http-request";
+import { type _CommonConfigAttributes, type TracesConfigAttributes } from "./sdk";
 
-type TracerConfig = {
-  resource: IResource;
-  otelcolOrigin: string;
-  tracerName: string;
-  otelcolPath: string;
-  debug: boolean;
-};
+type TracerConfig = _CommonConfigAttributes & TracesConfigAttributes;
 
-export const getTracer = (config: TracerConfig): Tracer => {
+export const getTracer = ({ otelcolTracesPath = "/v1/traces", ...config }: TracerConfig): Tracer => {
   const provider = new WebTracerProvider({ resource: config.resource });
   provider.addSpanProcessor(
-    new BatchSpanProcessor(new OTLPTraceExporter({ url: `${config.otelcolOrigin}${config.otelcolPath}` })),
+    new BatchSpanProcessor(new OTLPTraceExporter({ url: `${config.otelcolOrigin}${otelcolTracesPath}` })),
   );
   if (config.debug) {
     provider.addSpanProcessor(new SimpleSpanProcessor(new ConsoleSpanExporter()));
