@@ -7,6 +7,7 @@ import {
 } from "@opentelemetry/sdk-logs";
 import { OTLPLogExporter } from "@opentelemetry/exporter-logs-otlp-http";
 import { type _CommonConfigAttributes, type LogsConfigAttributes } from "./sdk";
+import { getCaller } from "./caller";
 
 export class Logger {
   private readonly logger: OtelLogger;
@@ -28,6 +29,7 @@ export class Logger {
       severityNumber: SeverityNumber.TRACE,
       severityText: "TRACE",
       body: message,
+      attributes: getCaller(1),
     });
   }
 
@@ -42,6 +44,7 @@ export class Logger {
       severityNumber: SeverityNumber.DEBUG,
       severityText: "DEBUG",
       body: message,
+      attributes: getCaller(1),
     });
   }
 
@@ -56,6 +59,7 @@ export class Logger {
       severityNumber: SeverityNumber.INFO,
       severityText: "INFO",
       body: message,
+      attributes: getCaller(1),
     });
   }
 
@@ -70,6 +74,7 @@ export class Logger {
       severityNumber: SeverityNumber.WARN,
       severityText: "WARN",
       body: message,
+      attributes: getCaller(1),
     });
   }
 
@@ -84,6 +89,7 @@ export class Logger {
       severityNumber: SeverityNumber.ERROR,
       severityText: "ERROR",
       body: message,
+      attributes: getCaller(1),
     });
   }
 
@@ -98,6 +104,7 @@ export class Logger {
       severityNumber: SeverityNumber.FATAL,
       severityText: "FATAL",
       body: message,
+      attributes: getCaller(1),
     });
   }
 
