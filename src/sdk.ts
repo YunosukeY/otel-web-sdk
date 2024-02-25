@@ -6,16 +6,59 @@ import { getMeter } from "./meter";
 import { type SeverityNumber } from "@opentelemetry/api-logs";
 
 export type Config = {
+  /**
+   * Your service name.
+   */
   serviceName?: string;
+  /**
+   * The origin of OpenTelemetry Collector.
+   * @default "http://localhost:4318"
+   */
   otelcolOrigin?: string;
+  /**
+   * The flag to enable debug output to `console.log`.
+   * @default false
+   */
   debug?: boolean;
+
+  /**
+   * The `Tracer` name.
+   */
   tracerName: string;
+  /**
+   * The path of the traces endpoint of OpenTelemetry Collector.
+   * @default "/v1/traces"
+   */
   otelcolTracesPath?: string;
+
+  /**
+   * The `Meter` name.
+   */
   meterName: string;
+  /**
+   * The path of the metrics endpoint of OpenTelemetry Collector.
+   * @default "/v1/metrics"
+   */
   otelcolMetricsPath?: string;
+  /**
+   * The interval in milliseconds for exporting metrics.
+   * @default 60_000
+   */
   metricsExportIntervalMillis?: number;
+
+  /**
+   * The `Logger` name.
+   */
   loggerName: string;
+  /**
+   * The path of the logs endpoint of OpenTelemetry Collector.
+   * @default "/v1/logs"
+   */
   otelcolLogsPath?: string;
+  /**
+   * The log level.
+   * @default SeverityNumber.INFO
+   */
   logLevel?: SeverityNumber;
 };
 
