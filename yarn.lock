@@ -1169,9 +1169,9 @@
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
 "@rollup/plugin-commonjs@^26.0.0":
-  version "26.0.2"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-26.0.2.tgz#1cf496e8d925ace8b3440e95ae3d94ae0655acf6"
-  integrity sha512-3corgoIXkETcGYMlJuCacVm/SLQsg4q5MxC80M1zU4QKYxz99Ip/TIzXiuFKgm9DJ95PDtfZ5TcFnteVAUmufg==
+  version "26.0.3"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-26.0.3.tgz#085ffb49818e43e4a2a96816a37affcc8a8cbaca"
+  integrity sha512-2BJcolt43MY+y5Tz47djHkodCC3c1VKVrBDKpVqHKpQ9z9S158kCCqB8NF6/gzxLdNlYW9abB3Ibh+kOWLp8KQ==
   dependencies:
     "@rollup/pluginutils" "^5.0.1"
     commondir "^1.0.1"
